@@ -1,4 +1,4 @@
-FROM node:19.0.0-alpine3.15 AS BUILDER
+FROM node:19.2.0-alpine3.15 AS BUILDER
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ RUN yarn build
 
 RUN yarn install --production --frozen-lockfile --ignore-scripts --prefer-offline
 
-FROM node:19.0.0-alpine3.15
+FROM node:19.2.0-alpine3.15
 
 WORKDIR /app
 
