@@ -1,0 +1,107 @@
+{
+	"name": "iam",
+	"version": "1.0.0",
+	"description": "Asasy IAM",
+	"main": "index.js",
+	"repository": "git@github.com:oofin-engineering/iam.git",
+	"author": "phr3nzy <adilosama47@gmail.com>",
+	"license": "SEE LICENSE IN LICENSE.md",
+	"private": true,
+	"scripts": {
+		"build": "tsc",
+		"start": "node dist/lib",
+		"dev": "tsc-watch --onSuccess 'node dist/index.js'",
+		"test": "jest --no-cache --verbose --runInBand --detectOpenHandles --forceExit",
+		"test:ci": "jest --ci --no-cache --verbose --runInBand --detectOpenHandles --forceExit",
+		"lint": "eslint --ext .ts,.js . --ignore-path .gitignore",
+		"fix": "eslint --ext .ts,.js . --ignore-path .gitignore --fix",
+		"lint-staged": "lint-staged",
+		"postinstall": "yarn husky install"
+	},
+	"dependencies": {
+		"@fastify/cors": "^8.1.0",
+		"@fastify/env": "^4.0.0",
+		"@fastify/helmet": "^10.0.2",
+		"@fastify/request-context": "^4.0.0",
+		"@fastify/sensible": "^5.1.0",
+		"@fastify/swagger": "^7.4.1",
+		"@fastify/under-pressure": "^8.1.0",
+		"@keycloak/keycloak-admin-client": "^18.0.2",
+		"ajv": "^8.11.0",
+		"ajv-errors": "^3.0.0",
+		"ajv-formats": "^2.1.1",
+		"argon2": "^0.28.7",
+		"axios": "^1.1.3",
+		"crypto-random-string": "<4",
+		"env-cmd": "^10.1.0",
+		"fastify": "^4.9.2",
+		"fastify-cron": "^1.3.1",
+		"fastify-plugin": "^4.3.0",
+		"ioredis": "^5.2.3",
+		"jsonwebtoken": "^8.5.1",
+		"jwk-to-pem": "^2.0.5",
+		"jwks-rsa": "^2.1.5",
+		"knex": "^2.3.0",
+		"make-promises-safe": "^5.1.0",
+		"objection": "^3.0.1",
+		"objection-db-errors": "^1.1.2",
+		"parse-redis-url-simple": "^1.0.2",
+		"pg": "^8.8.0",
+		"pino": "^8.6.1",
+		"pino-pretty": "^8.1.0",
+		"qs": "^6.11.0",
+		"uuid": "^9.0.0"
+	},
+	"devDependencies": {
+		"@types/ioredis": "^4.28.10",
+		"@types/jest": "^28.1.6",
+		"@types/jsonwebtoken": "^8.5.8",
+		"@types/jwk-to-pem": "^2.0.1",
+		"@types/node": "^18.11.0",
+		"@types/qs": "^6.9.7",
+		"@types/uuid": "^8.3.4",
+		"@typescript-eslint/eslint-plugin": "^5.40.1",
+		"@typescript-eslint/parser": "^5.40.1",
+		"eslint": "^8.26.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-security": "^1.5.0",
+		"husky": "^8.0.1",
+		"jest": "^28.1.3",
+		"lint-staged": "^13.0.3",
+		"prettier": "^2.7.1",
+		"ts-jest": "^28.0.7",
+		"ts-node": "^10.9.1",
+		"tsc-watch": "^5.0.3",
+		"typescript": "^4.7.4"
+	},
+	"lint-staged": {
+		"*.{js,ts,json,md,yml,yaml}": [
+			"prettier --write"
+		]
+	},
+	"jest": {
+		"verbose": true,
+		"preset": "ts-jest",
+		"testEnvironment": "node",
+		"testPathIgnorePatterns": [
+			"node_modules",
+			"tests/config/*"
+		],
+		"transform": {
+			"^.+\\.tsx?$": "ts-jest"
+		},
+		"testRegex": [
+			"/tests?/[a-zA-Z0-9]{0,}\\.(test|spec)\\.(js|ts)[\\s]?",
+			"/tests?/.*/[a-zA-Z0-9]{0,}\\.(test|spec)\\.(js|ts)[\\s]?"
+		],
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"jsx",
+			"json",
+			"node"
+		]
+	}
+}

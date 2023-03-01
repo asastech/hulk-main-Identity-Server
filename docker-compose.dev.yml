@@ -1,0 +1,46 @@
+# This file defines the Authorization server mock infrastructure
+
+version: '3.9'
+
+services:
+  auth-db:
+    image: postgres:14.4-alpine
+    command: postgres -c fsync=off -c synchronous_commit=off -c full_page_writes=off -c random_page_cost=1.0
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data
+    tmpfs: /var/lib/postgresql/data
+    restart: unless-stopped
+  auth:
+    build:
+      context: ./deployment/dev/keycloak
+      dockerfile: Dockerfile
+      args:
+        - KC_DATA=bank.json
+    command: start-dev
+    healthcheck:
+      test: ['CMD', 'curl', '-skXGET', 'http://localhost:8888/health']
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: auth-db
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_SCHEMA: public
+      DB_PASSWORD: password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: 'true'
+      KC_METRICS_ENABLED: 'true'
+      KC_FEATURES_DISABLED: preview,web-authn,docker,openshift-integration
+    ports:
+      - 8888:8080
+    links:
+      - auth-db
+    depends_on:
+      - auth-db
