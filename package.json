@@ -22,7 +22,7 @@
 		"@fastify/cors": "^8.1.0",
 		"@fastify/env": "^4.0.0",
 		"@fastify/helmet": "^10.0.2",
-		"@fastify/request-context": "^4.0.0",
+		"@fastify/request-context": "^4.2.0",
 		"@fastify/sensible": "^5.1.0",
 		"@fastify/swagger": "^7.4.1",
 		"@fastify/under-pressure": "^8.1.0",
